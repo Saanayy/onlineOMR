@@ -38,7 +38,7 @@ public class EvaluateActivity extends AppCompatActivity {
 
         init();
         wrongAnswers = findWrongAnswers();
-        tvScore.setText("Score: "+(questioncount-wrongAnswers.size()) + "out of " + questioncount);
+        tvScore.setText("Score: "+(questioncount-wrongAnswers.size()) + " out of " + questioncount);
         setRecylerView();
     }
 

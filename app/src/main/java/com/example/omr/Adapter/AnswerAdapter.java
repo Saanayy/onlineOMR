@@ -1,7 +1,6 @@
 package com.example.omr.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.example.omr.R;
 import com.example.omr.Utils.Constants;
 import com.example.omr.Utils.UtilityFunctions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
@@ -56,33 +54,54 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
         switch (yourAnswerCharacterList.get(position)) {
             case 'A':
                 clearAllButtons(holder);
-                holder.btnA.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnA.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 break;
             case 'B':
                 clearAllButtons(holder);
-                holder.btnB.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnB.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 break;
             case 'C':
                 clearAllButtons(holder);
-                holder.btnC.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnC.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 break;
             case 'D':
                 clearAllButtons(holder);
-                holder.btnD.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnD.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 break;
             case 'N':
                 clearAllButtons(holder);
+        }
+
+        if (yourAnswerCharacterList.get(position) != correctAnswerCharacterList.get(position)) {
+            switch (correctAnswerCharacterList.get(position)) {
+                case 'A':
+                    holder.btnA.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
+                    break;
+                case 'B':
+                    holder.btnB.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
+                    break;
+                case 'C':
+                    holder.btnC.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
+                    break;
+                case 'D':
+                    holder.btnD.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
+                    break;
+
+            }
         }
 
         holder.btnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clearAllButtons(holder);
-                holder.btnA.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnA.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 yourAnswerCharacterList.set(position, 'A');
+                correctAnswerCharacterList.set(position, 'A');
                 String newString = UtilityFunctions.ConvertListtoString(yourAnswerCharacterList, questionCount);
+                String newStringcorrect = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
                 Log.d(TAG, "onBindViewHolder: " + newString);
                 sPref.put(SharedPrefManager.Key.YOUR_ANSWER, newString);
+                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newStringcorrect);
 
             }
         });
@@ -91,11 +110,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
             @Override
             public void onClick(View v) {
                 clearAllButtons(holder);
-                holder.btnB.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnB.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 yourAnswerCharacterList.set(position, 'B');
+                correctAnswerCharacterList.set(position, 'B');
                 String newString = UtilityFunctions.ConvertListtoString(yourAnswerCharacterList, questionCount);
+                String newStringcorrect = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
                 sPref.put(SharedPrefManager.Key.YOUR_ANSWER, newString);
                 Log.d(TAG, "onBindViewHolder: " + sPref.getString(SharedPrefManager.Key.YOUR_ANSWER));
+                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newStringcorrect);
             }
         });
 
@@ -103,11 +125,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
             @Override
             public void onClick(View v) {
                 clearAllButtons(holder);
-                holder.btnC.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnC.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 yourAnswerCharacterList.set(position, 'C');
+                correctAnswerCharacterList.set(position, 'C');
                 String newString = UtilityFunctions.ConvertListtoString(yourAnswerCharacterList, questionCount);
+                String newStringcorrect = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
                 sPref.put(SharedPrefManager.Key.YOUR_ANSWER, newString);
                 Log.d(TAG, "onBindViewHolder: " + newString);
+                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newStringcorrect);
 
             }
         });
@@ -116,11 +141,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
             @Override
             public void onClick(View v) {
                 clearAllButtons(holder);
-                holder.btnD.setBackgroundColor(Constants.MARKED_BUTTON_COLOR);
+                holder.btnD.setBackgroundResource(Constants.MARKED_BUTTON_COLOR);
                 yourAnswerCharacterList.set(position, 'D');
+                correctAnswerCharacterList.set(position, 'D');
                 String newString = UtilityFunctions.ConvertListtoString(yourAnswerCharacterList, questionCount);
+                String newStringcorrect = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
                 sPref.put(SharedPrefManager.Key.YOUR_ANSWER, newString);
                 Log.d(TAG, "onBindViewHolder: " + newString);
+                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newStringcorrect);
 
             }
         });
@@ -128,9 +156,33 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
         holder.btnCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                correctAnswerCharacterList.set(position, yourAnswerCharacterList.get(position));
-                String newString = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
-                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newString);
+                if(yourAnswerCharacterList.get(position) != 'N'){
+                    correctAnswerCharacterList.set(position, yourAnswerCharacterList.get(position));
+                    String newString = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
+                    sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newString);
+                    disableAllButtons(holder);
+                }else{
+                    Toast.makeText(context, "Atleast Select one answer", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+            }
+        });
+
+
+        holder.btnUndo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableAllButtons(holder);
+                clearAllButtons(holder);
+                yourAnswerCharacterList.set(position, 'N');
+                correctAnswerCharacterList.set(position, 'N');
+                String newString = UtilityFunctions.ConvertListtoString(yourAnswerCharacterList, questionCount);
+                String newStringcorrect = UtilityFunctions.ConvertListtoString(correctAnswerCharacterList, questionCount);
+                sPref.put(SharedPrefManager.Key.YOUR_ANSWER, newString);
+                sPref.put(SharedPrefManager.Key.CORRECT_ANSWER, newStringcorrect);
             }
         });
 
@@ -139,9 +191,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
             @Override
             public void onClick(View v) {
 //                ViewGroup viewGroup = holder.(android.R.id.content);
-                Button btnWrongA, btnWrongB, btnWrongC, btnWrongD;
-                ImageView imgCross;
 
+                ImageView imgCross;
+                final Button btnWrongA, btnWrongB, btnWrongC, btnWrongD;
                 View dialogView = LayoutInflater.from(context).inflate(R.layout.wrong_dialog, null, false);
                 //Now we need an AlertDialog.Builder object
                 btnWrongA = dialogView.findViewById(R.id.wrong_a);
@@ -178,18 +230,22 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
                 btnWrongA.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.btnA.setBackgroundColor(Constants.CORRECTED_BUTTON_COLOR);
+                        holder.btnA.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
                         setCorrectAnswer(position, 'A');
+                        disableAllButtons(holder);
                         alertDialog.dismiss();
                     }
+
+
                 });
 
 
                 btnWrongB.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.btnB.setBackgroundColor(Constants.CORRECTED_BUTTON_COLOR);
+                        holder.btnB.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
                         setCorrectAnswer(position, 'B');
+                        disableAllButtons(holder);
                         alertDialog.dismiss();
                     }
                 });
@@ -198,8 +254,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
                 btnWrongC.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.btnC.setBackgroundColor(Constants.CORRECTED_BUTTON_COLOR);
+                        holder.btnC.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
                         setCorrectAnswer(position, 'C');
+                        disableAllButtons(holder);
                         alertDialog.dismiss();
                     }
                 });
@@ -208,8 +265,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
                 btnWrongD.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.btnD.setBackgroundColor(Constants.CORRECTED_BUTTON_COLOR);
+                        holder.btnD.setBackgroundResource(Constants.CORRECTED_BUTTON_COLOR);
                         setCorrectAnswer(position, 'D');
+                        disableAllButtons(holder);
                         alertDialog.dismiss();
                     }
                 });
@@ -222,7 +280,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
                 });
 
 
+
+
+
             }
+
+
+
+
 
             private void setCorrectAnswer(int position, char d) {
                 correctAnswerCharacterList.set(position, d);
@@ -234,12 +299,33 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
 
     }
 
+    private void enableAllButtons(AnswerViewHolder holder) {
+        holder.btnA.setEnabled(true);
+        holder.btnB.setEnabled(true);
+        holder.btnC.setEnabled(true);
+        holder.btnD.setEnabled(true);
+        holder.btnCorrect.setVisibility(View.VISIBLE);
+        holder.btnWrong.setVisibility(View.VISIBLE);
+        holder.btnUndo.setVisibility(View.GONE);
+    }
+
+    private void disableAllButtons(AnswerViewHolder holder) {
+        holder.btnA.setEnabled(false);
+        holder.btnB.setEnabled(false);
+        holder.btnC.setEnabled(false);
+        holder.btnD.setEnabled(false);
+        holder.btnCorrect.setVisibility(View.GONE);
+        holder.btnWrong.setVisibility(View.GONE);
+        holder.btnUndo.setVisibility(View.VISIBLE);
+
+    }
+
 
     private void clearAllButtons(AnswerViewHolder holder) {
-        holder.btnA.setBackgroundColor(Constants.DEFAULT_BUTTON_COLOR);
-        holder.btnB.setBackgroundColor(Constants.DEFAULT_BUTTON_COLOR);
-        holder.btnC.setBackgroundColor(Constants.DEFAULT_BUTTON_COLOR);
-        holder.btnD.setBackgroundColor(Constants.DEFAULT_BUTTON_COLOR);
+        holder.btnA.setBackgroundResource(Constants.DEFAULT_BUTTON_COLOR);
+        holder.btnB.setBackgroundResource(Constants.DEFAULT_BUTTON_COLOR);
+        holder.btnC.setBackgroundResource(Constants.DEFAULT_BUTTON_COLOR);
+        holder.btnD.setBackgroundResource(Constants.DEFAULT_BUTTON_COLOR);
     }
 
     @Override
@@ -255,7 +341,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
 
 class AnswerViewHolder extends RecyclerView.ViewHolder {
 
-    Button btnA, btnB, btnC, btnD, btnCorrect, btnWrong;
+    Button btnA, btnB, btnC, btnD, btnCorrect, btnWrong, btnUndo;
     TextView tvQuestionNumber;
 
 
@@ -265,6 +351,7 @@ class AnswerViewHolder extends RecyclerView.ViewHolder {
         btnB = itemView.findViewById(R.id.sheet_option2);
         btnC = itemView.findViewById(R.id.sheet_option3);
         btnD = itemView.findViewById(R.id.sheet_option4);
+        btnUndo = itemView.findViewById(R.id.sheet_undo);
         tvQuestionNumber = itemView.findViewById(R.id.sheet_question_number);
         btnCorrect = itemView.findViewById(R.id.sheet_correct);
         btnWrong = itemView.findViewById(R.id.sheet_wrong);
