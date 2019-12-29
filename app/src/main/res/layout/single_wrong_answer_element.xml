@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+
+    <TextView
+        android:id="@+id/wrong_answer_element_question_no"
+        android:layout_width="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:text="180"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/wrong_answer_element_incorrect_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@+id/wrong_answer_element_question_no"
+        android:layout_centerVertical="true"
+        >
+
+        <TextView
+
+            android:layout_centerVertical="true"
+            android:id="@+id/single_wrong_placeholder_youranswer"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your answer"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/wrong_answer_element_youranswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="53dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/single_wrong_placeholder_youranswer"
+            android:text="A"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/single_wrong_placeholder_correctanswer"
+            android:layout_below="@+id/single_wrong_placeholder_youranswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correct answer "
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/wrong_answer_element_correctanswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="B"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/wrong_answer_element_youranswer"
+            android:layout_toRightOf="@id/single_wrong_placeholder_correctanswer"/>
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>
