@@ -26,65 +26,77 @@
 
         <Button
             android:id="@+id/sheet_option1"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentLeft="true"
+            android:background="@drawable/button_background_circle"
             android:text="A" />
 
         <Button
             android:id="@+id/sheet_option2"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/sheet_option1"
+            android:background="@drawable/button_background_circle"
             android:text="B" />
 
         <Button
             android:id="@+id/sheet_option3"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_below="@+id/sheet_option1"
-            android:layout_marginTop="4dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/sheet_option2"
+            android:background="@drawable/button_background_circle"
             android:text="C" />
 
         <Button
             android:id="@+id/sheet_option4"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_below="@id/sheet_option2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
             android:layout_toRightOf="@+id/sheet_option3"
+            android:background="@drawable/button_background_circle"
             android:text="D" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginRight="8dp"
-        android:layout_alignParentRight="true"
         android:id="@+id/sheet_checker_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp">
 
         <Button
-            android:background="@drawable/button_background"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/sheet_correct"
-            android:layout_width="128dp"
-            android:layout_height="64dp"
-            android:text="Correct"
-            />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_check_black_24dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless" />
 
         <Button
-            android:backgroundTint="@color/colorAccent"
             android:id="@+id/sheet_wrong"
-            android:layout_below="@id/sheet_correct"
-            android:layout_width="128dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="4dp"
-            android:text="Wrong"
-            />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/sheet_correct"
+            android:background="@drawable/ic_close_black_24dp"
+            android:backgroundTint="@color/colorPrimaryDark" />
+
+        <Button
+            android:id="@+id/sheet_undo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/sheet_correct"
+            android:background="@drawable/ic_replay_black_24dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/colorPrimaryDark" />
+
 
     </RelativeLayout>
 
